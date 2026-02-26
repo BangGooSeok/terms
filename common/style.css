@@ -1,4 +1,4 @@
-/* 1. 변수 및 초기화 */
+/* 1. 공통 변수 설정 (라이트모드 기준) */
 :root {
     --primary-color: #000000;
     --bg-color: #ffffff;
@@ -7,8 +7,23 @@
     --line-color: #eeeeee;
     --accent-color: #000000;
     --table-border: #dddddd;
+    --header-bg: #f9f9f9;
 }
 
+/* 2. 다크모드 설정 (시스템 설정에 따라 자동 전환) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;
+        --text-color: #ececec;
+        --light-text: #aaaaaa;
+        --line-color: #333333;
+        --table-border: #444444;
+        --header-bg: #1e1e1e;
+        --accent-color: #ffffff; /* 다크모드에선 강조선을 흰색으로 */
+    }
+}
+
+/* 3. 기본 레이아웃 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.7;
@@ -24,23 +39,23 @@ body {
     margin: 0 auto;
 }
 
-/* 2. 타이틀 및 섹션 */
+/* 4. 타이틀 및 섹션 디자인 */
 h1 {
     font-size: 1.8rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    color: var(--primary-color);
+    color: var(--text-color);
     margin-bottom: 40px;
-    text-align: left;
 }
 
-section { margin-bottom: 35px; }
+section {
+    margin-bottom: 35px;
+}
 
 h2 {
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #000;
     display: flex;
     align-items: center;
 }
@@ -54,21 +69,36 @@ h2::before {
     display: inline-block;
 }
 
-/* 3. 리스트 스타일 */
-p, li { font-size: 0.95rem; color: #444; }
-ul { padding-left: 15px; margin: 10px 0; list-style-type: none; }
-li { margin-bottom: 8px; position: relative; }
+/* 5. 텍스트 및 리스트 */
+p, li {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+ul {
+    padding-left: 15px;
+    margin: 10px 0;
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 8px;
+    position: relative;
+}
+
 li::before {
     content: "•";
     position: absolute;
     left: -15px;
-    color: #ccc;
+    color: var(--light-text);
 }
 
-/* 4. 테이블 공통 스타일 */
+/* 6. 테이블 스타일 (스크롤 대응) */
 .table-wrapper {
     overflow-x: auto;
     margin: 20px 0;
+    border-radius: 8px;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -88,19 +118,20 @@ th, td {
 }
 
 th {
-    background-color: #f9f9f9;
+    background-color: var(--header-bg);
     font-weight: 700;
     text-align: center;
-    color: #333;
 }
 
-td:first-child { text-align: center; }
+td:first-child {
+    text-align: center;
+}
 
-/* 5. 부칙 및 푸터 */
+/* 7. 부칙 및 푸터 */
 .addendum {
     margin-top: 50px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: var(--header-bg);
     border-radius: 8px;
 }
 
@@ -113,7 +144,6 @@ td:first-child { text-align: center; }
 .footer-brand {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #000;
     margin-bottom: 10px;
 }
 
@@ -128,14 +158,27 @@ td:first-child { text-align: center; }
     display: inline-block;
 }
 
-.business-details b { color: #333; font-weight: 500; }
-.copyright { font-size: 0.8rem; color: #bbb; margin-top: 20px; }
+.business-details b {
+    color: var(--text-color);
+}
 
-/* 6. 모바일 대응 (Media Query) */
+.copyright {
+    font-size: 0.8rem;
+    color: var(--light-text);
+    margin-top: 20px;
+    opacity: 0.6;
+}
+
+/* 8. 모바일 최적화 */
 @media (max-width: 480px) {
-    body { padding: 20px 15px; }
-    h1 { font-size: 1.5rem; margin-bottom: 30px; }
-    h2 { font-size: 1rem; }
-    p, li { font-size: 0.9rem; }
-    .business-details span { display: block; margin-bottom: 5px; }
+    body {
+        padding: 20px 15px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .business-details span {
+        display: block;
+        margin-bottom: 5px;
+    }
 }
